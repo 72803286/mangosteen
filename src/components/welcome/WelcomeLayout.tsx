@@ -1,0 +1,21 @@
+import { defineComponent, useSlots } from 'vue';
+import s from "./WelcomeLayout.module.scss"
+
+import { RouterLink } from 'vue-router';
+
+export const WelcomeLayout = defineComponent({
+    setup: (props, context) => {
+        const {slots} = context
+        return () => (
+            <div class={s.wrapper}>
+                <div class={s.card}>
+                    {slots.icon?.()}
+                    {slots.text?.()}
+                </div>
+                <div class={s.actions}>
+                    {slots.buttons?.()}
+                </div>
+            </div>
+        )
+    }
+})
