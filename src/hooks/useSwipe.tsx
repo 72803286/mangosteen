@@ -6,7 +6,7 @@ type Point = {
 }
 
 export const useSwipe = (element: Ref<HTMLElement | null>) => {
-  const start = ref<Point | null>(null)
+  const start = ref<Point| null>(null)
   const end = ref<Point | null>(null)
   const swiping = ref(false)
   const distance = computed(() => {
