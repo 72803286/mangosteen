@@ -14,6 +14,7 @@ export const StartPage = defineComponent({
     const onClickMenu = () => {
       refOverlayVisible.value = !refOverlayVisible.value
     }
+    
     return () => (
       <div>
         <Navbar>{
@@ -22,7 +23,8 @@ export const StartPage = defineComponent({
             icon: () => <Icon name='menu' class={s.navIcon} onClick={onClickMenu} />
           }
         }</Navbar>
-        <Center class={s.pig_wrapper}>
+        <Center class={s.pig_wrapper} direction='vertical' jxc='蒋晓晨'>
+          <Icon name="pig" class={s.pig} />
           <Icon name="pig" class={s.pig} />
         </Center>
         <div class={s.button_wrapper}>

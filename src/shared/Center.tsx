@@ -11,14 +11,17 @@ export const Center = defineComponent({
     direction: {
       type: String as PropType<'-' | '|' | 'horizontal' | 'vertical'>,
       default: 'horizontal'
-    }
+    },
+    jxc:String
   },
   setup: (props, context) => {
     const extraClass = directionMap[props.direction]
     return () => (
-      <div class={[s.center, extraClass]}>{
-        context.slots.default?.()
-      }</div>
+      <div class={[s.center, extraClass]}>
+        {context.slots.default?.()}
+        <div>{props.jxc}</div>
+        <div>{props.jxc}</div>
+      </div>
     )
   }
 })
