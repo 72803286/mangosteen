@@ -27,6 +27,9 @@ dependencies:
     version: 4.0.14(vue@3.2.31)
 
 devDependencies:
+  '@faker-js/faker':
+    specifier: 8.0.2
+    version: 8.0.2
   '@vitejs/plugin-vue':
     specifier: 2.3.1
     version: 2.3.1(vite@2.9.1)(vue@3.2.31)
@@ -363,6 +366,11 @@ packages:
 
   /@emmetio/scanner@1.0.0:
     resolution: {integrity: sha512-8HqW8EVqjnCmWXVpqAOZf+EGESdkR27odcMMMGefgKXtar00SoYNSryGv//TELI4T3QFsECo78p+0lmalk/CFA==}
+    dev: true
+
+  /@faker-js/faker@8.0.2:
+    resolution: {integrity: sha512-Uo3pGspElQW91PCvKSIAXoEgAUlRnH29sX2/p89kg7sP1m2PzCufHINd0FhTXQf6DYGiUlVncdSPa2F9wxed2A==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
     dev: true
 
   /@jridgewell/resolve-uri@3.0.5:
