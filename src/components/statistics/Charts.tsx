@@ -1,4 +1,4 @@
-import { computed, defineComponent, onMounted, PropType, ref, watch } from 'vue'
+import { computed, defineComponent, onMounted, PropType, ref, watch,watchEffect } from 'vue'
 import { FormItem } from '../../shared/Form'
 import s from './Charts.module.scss'
 import { LineChart } from './LineChart'
@@ -41,18 +41,18 @@ export const Charts = defineComponent({
       })
     })
 
-    const fetchData1 = async () => {
-      const response = await http.get<{ groups: Data1; summary: number }>('/items/summary', {
-        happen_after: props.startDate,
-        happen_before: props.endDate,
-        kind: kind.value,
-        group_by: 'happen_at',
-        _mock: 'itemSummary'
-      })
-      data1.value = response.data.groups
-    }
-    onMounted(fetchData1)
-    watch(() => kind.value, fetchData1)
+    // const fetchData1 = async () => {
+    //   const response = await http.get<{ groups: Data1; summary: number }>('/items/summary', {
+    //     happen_after: props.startDate,
+    //     happen_before: props.endDate,
+    //     kind: kind.value,
+    //     group_by: 'happen_at',
+    //     _mock: 'itemSummary'
+    //   })
+    //   data1.value = response.data.groups
+    // }
+    // onMounted(fetchData1)
+    // watch(() => kind.value, fetchData1)
 
     const data2 = ref<Data2>([])
     const betterData2 = computed<{ name: string; value: number }[]>(() =>
@@ -70,18 +70,29 @@ export const Charts = defineComponent({
       }))
     })
 
-    const fetchData2 = async ()=>{
-      const response = await http.get<{ groups: Data2; summary: number }>('/items/summary', {
+    const fetchData = async ()=>{
+      const response2 = await http.get<{ groups: Data2; summary: number }>('/items/summary', {
         happen_after: props.startDate,
         happen_before: props.endDate,
         kind: kind.value,
         group_by: 'tag_id',
         _mock: 'itemSummary'
       })
-      data2.value = response.data.groups
+      data2.value = response2.data.groups
+
+      const response1 = await http.get<{ groups: Data1; summary: number }>('/items/summary', {
+        happen_after: props.startDate,
+        happen_before: props.endDate,
+        kind: kind.value,
+        group_by: 'happen_at',
+        _mock: 'itemSummary'
+      })
+      data1.value = response1.data.groups
+      console.log(response1);
+      
     }
-    onMounted(fetchData2)
-    watch(() => kind.value, fetchData2)
+    onMounted(fetchData)
+    watchEffect(fetchData)
 
     return () => (
       <div class={s.wrapper}>
@@ -94,6 +105,7 @@ export const Charts = defineComponent({
           ]}
           v-model={kind.value}
         />
+        <div>xxxxxx</div>
         <LineChart data={betterData1.value} />
         <PieChart data={betterData2.value} />
         <Bars data={betterData3.value} />
