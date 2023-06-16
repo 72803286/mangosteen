@@ -10,7 +10,7 @@ export const Money = defineComponent({
     return () => <span>{addZero(props.value / 100)}</span>
   },
 })
- 
+
 const addZero = (n: number) => {
   const nString = n.toString()
   const dotIndex = nString.indexOf('.')
