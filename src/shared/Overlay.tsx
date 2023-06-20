@@ -1,6 +1,6 @@
 import { Dialog } from 'vant'
 import { defineComponent, onMounted, PropType, ref } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useMeStore } from '../stores/useMeStore'
 import { Icon } from './Icon'
 import s from './Overlay.module.scss'
@@ -10,12 +10,13 @@ export const Overlay = defineComponent({
       type: Function as PropType<() => void>,
     },
   },
-  setup: (props, context) => {
+  setup: (props) => {
     const meStore = useMeStore()
     const close = () => {
       props.onClose?.()
     }
     const route = useRoute()
+    const router = useRouter()
     const me = ref<User>()
     onMounted(async () => {
       const response = await meStore.mePromise
@@ -27,6 +28,7 @@ export const Overlay = defineComponent({
         message: '你真的要退出登录吗？',
       })
       localStorage.removeItem('jwt')
+      window.location.reload()
     }
     return () => (
       <>
@@ -80,7 +82,7 @@ export const Overlay = defineComponent({
 })
 
 export const OverlayIcon = defineComponent({
-  setup: (props, context) => {
+  setup: () => {
     const refOverlayVisible = ref(false)
     const onClickMenu = () => {
       refOverlayVisible.value = !refOverlayVisible.value
